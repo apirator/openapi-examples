@@ -1,0 +1,52 @@
+openapi: 3.0.0
+servers:
+  - description: APIMock Server
+    url: >-
+      https://apimock.svc.cluster.local
+info:
+  title: Bets - Championship API
+  description: These APIs is part of bets solution. This APIs is responsible to championship management.
+  version: 0.0.1
+  contact:
+    email: apiratordev@gmail.com
+  license:
+    name: Apache 2.0
+    url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
+tags:
+  - name: championships
+    description: Championship management APIs
+paths:
+  '/api/championships/{championship-id}':
+    get:
+      operationId: get-championship-by-id
+      summary: Get Championship Details
+      tags:
+        - championships
+      parameters:
+        - name: championship-id
+          in: path
+          description: Championship ID
+          required: true
+          schema:
+            type: string
+            format: string
+      responses:
+        '200':
+          description: 200 response
+          content:
+            application/json:
+              examples:
+                championship:
+                  value:
+                    name: UEFA Champions League
+                    title: Champions League
+                    country: World
+        '404':
+          description: 404 response
+          content:
+            application/json:
+              examples:
+                error:
+                  value:
+                    code: 404
+                    message: not found

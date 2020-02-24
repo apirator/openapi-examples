@@ -1,0 +1,52 @@
+openapi: 3.0.0
+servers:
+  - description: APIMock Server
+    url: >-
+      https://apimock.svc.cluster.local
+info:
+  title: Matches - Players API
+  description: These APIs is part of bets solution. This APIs is responsible to matches management.
+  version: 0.0.1
+  contact:
+    email: apiratordev@gmail.com
+  license:
+    name: Apache 2.0
+    url: 'http://www.apache.org/licenses/LICENSE-2.0.html'    
+tags:
+  - name: matches
+    description: Matches management APIs  
+paths:
+  '/api/matches/{match-id}':
+    get:
+      operationId: get-match-by-id
+      summary: Get Match Details
+      tags:
+        - matches
+      parameters:
+        - name: match-id
+          in: path
+          description: Match ID
+          required: true
+          schema:
+            type: string
+            format: string
+      responses:
+        '200':
+          description: 200 response
+          content:
+            application/json:
+              examples:
+                match:
+                  value:
+                    homeTeam: Barcelona
+                    awayTeam: Real Madrid
+                    championship: UEFA Champions League
+        '404':
+          description: 404 response
+          content:
+            application/json:
+              examples:
+                error:
+                  value:
+                    code: 404
+                    message: not found

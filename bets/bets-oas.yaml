@@ -1,0 +1,60 @@
+openapi: 3.0.0
+servers:
+  - description: APIMock Server
+    url: >-
+      https://apimock.svc.cluster.local
+info:
+  title: Bets - Bets API
+  description: These APIs is part of bets solution. This APIs is responsible to bets management.
+  version: 0.0.1
+tags:
+  - name: bets
+    description: Bets management APIs
+paths:
+  /api/bets:
+    post:
+      operationId: create-bet
+      summary: Create Bet
+      tags:
+        - bets
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/bet'
+            examples:
+              bet-request:
+                value:
+                  match: 1X-DC
+                  email: joe@doe.com
+                  championship: Uefa Champions League
+                  awayTeamScore: '2'
+                  homeTeamScore: '3'
+      responses:
+        '201':
+          description: ''
+          content:
+            application/json:
+              examples:
+                bet:
+                  value:
+                    match: 1X-DC
+                    email: joe@doe.com
+                    championship: Uefa Champions League
+                    awayTeamScore: '2'
+                    homeTeamScore: '3'
+components:
+  schemas:
+    bet:
+      type: object
+      properties:
+        homeTeamScore:
+          type: string
+        awayTeamScore:
+          type: string
+        championship:
+          type: string
+        match:
+          type: string
+        email:
+          type: string
